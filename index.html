@@ -1,0 +1,1073 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PERCORSO ADO - Oratorio Albano</title>
+    <!-- Font Google: Montserrat e Fredoka per lo stile della locandina, Poppins per i testi -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@600;700&family=Montserrat:wght@800;900&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-blue-dark: #1952a2;
+            --bg-blue-light: #1e5db5;
+            --rose-poster: #ff2b88;
+            --warm-amber: #ffca03;
+            --circle-purple: #6a44a2;
+            --text-dark: #1e293b;
+            --card-light-bg: rgba(255, 255, 255, 0.94);
+            
+            /* Colori Categorie Filtri */
+            --color-pizzata: #ff2b88;
+            --color-incontro: #0284c7;
+            --color-fede: #8b5cf6;
+            --color-proposte: #10b981;
+            --color-uscita: #f97316;
+            --color-campo: #ef4444;
+            --color-dadecidere: #ffca03;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--bg-blue-dark);
+            background-image: repeating-linear-gradient(
+                -45deg,
+                var(--bg-blue-dark),
+                var(--bg-blue-dark) 18px,
+                var(--bg-blue-light) 18px,
+                var(--bg-blue-light) 36px
+            );
+            color: #ffffff;
+            min-height: 100vh;
+            padding: 20px 15px 120px 15px;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        .wave-container {
+            position: absolute;
+            width: 160px;
+            height: 90px;
+            pointer-events: none;
+            z-index: 1;
+        }
+        .wave-top-left { top: 10px; left: -10px; }
+        .wave-bottom-right { bottom: 20px; right: -10px; transform: rotate(180deg); }
+
+        .bg-decorative-circle {
+            position: absolute;
+            top: 40px;
+            right: -60px;
+            width: 220px;
+            height: 220px;
+            border-radius: 50%;
+            background-color: var(--circle-purple);
+            border: 18px solid var(--warm-amber);
+            z-index: 1;
+            pointer-events: none;
+            opacity: 0.85;
+        }
+
+        /* INTRO ANIMATA */
+        #intro-overlay {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100vw; height: 100vh;
+            background: #11284d;
+            z-index: 9999;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            animation: fadeOutIntro 0.8s ease 3.2s forwards;
+            pointer-events: none;
+        }
+
+        .path-line {
+            position: relative;
+            width: 140px;
+            height: 380px;
+            display: flex;
+            flex-direction: column-reverse;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .footstep {
+            width: 52px;
+            height: 52px;
+            fill: var(--warm-amber);
+            opacity: 0;
+            animation: stepFadeIn 0.4s forwards;
+        }
+
+        .footstep.left { transform: rotate(180deg) translateX(30px) rotate(-10deg); }
+        .footstep.right { transform: rotate(180deg) translateX(-30px) rotate(10deg); }
+
+        .step-1 { animation-delay: 0.2s; }
+        .step-2 { animation-delay: 0.6s; fill: var(--rose-poster); }
+        .step-3 { animation-delay: 1.0s; }
+        .step-4 { animation-delay: 1.4s; fill: #38bdf8; }
+        .step-5 { animation-delay: 1.8s; fill: var(--warm-amber); }
+
+        .intro-text {
+            margin-top: 25px;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 900;
+            font-size: 1.4rem;
+            letter-spacing: 3px;
+            color: var(--warm-amber);
+            text-transform: uppercase;
+            opacity: 0;
+            animation: stepFadeIn 0.5s 2.3s forwards;
+        }
+
+        @keyframes stepFadeIn { to { opacity: 1; } }
+        @keyframes fadeOutIntro { to { opacity: 0; visibility: hidden; } }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+            opacity: 0;
+            animation: revealContent 0.8s ease 3.3s forwards;
+        }
+
+        @keyframes revealContent { to { opacity: 1; } }
+
+        header {
+            text-align: center;
+            margin-bottom: 35px;
+        }
+
+        .logo-oratorio {
+            width: 70px;
+            height: 70px;
+            object-fit: contain;
+            margin-bottom: 12px;
+            filter: drop-shadow(0 2px 6px rgba(0,0,0,0.3));
+        }
+
+        .poster-title-container {
+            display: inline-flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+        }
+
+        .box-percorso {
+            background-color: #ffffff;
+            color: #1952a2;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2.5rem;
+            font-weight: 900;
+            letter-spacing: 2px;
+            padding: 8px 36px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+            transform: rotate(-2deg);
+            position: relative;
+            z-index: 1;
+        }
+
+        .box-ado {
+            background-color: var(--rose-poster);
+            color: #ffffff;
+            font-family: 'Fredoka', cursive, sans-serif;
+            font-size: 3.2rem;
+            font-weight: 700;
+            padding: 2px 48px;
+            border-radius: 14px;
+            box-shadow: 0 6px 16px rgba(0,0,0,0.3);
+            transform: rotate(1.5deg);
+            margin-top: -16px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .sub-pastorale {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1rem;
+            font-weight: 900;
+            letter-spacing: 2.5px;
+            color: var(--warm-amber);
+            text-transform: uppercase;
+            margin-top: 18px;
+            text-shadow: 0 2px 6px rgba(0,0,0,0.4);
+        }
+
+        .month-section { margin-bottom: 28px; }
+
+        .month-header {
+            display: inline-block;
+            background: var(--warm-amber);
+            color: #11284d;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 900;
+            padding: 6px 16px;
+            border-radius: 4px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 12px;
+            box-shadow: 3px 3px 0px rgba(0, 0, 0, 0.25);
+            transform: rotate(-0.5deg);
+        }
+
+        .month-events {
+            display: grid;
+            gap: 14px;
+        }
+
+        .event-card {
+            background: var(--card-light-bg);
+            color: var(--text-dark);
+            border-radius: 6px;
+            padding: 16px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            transition: all 0.2s ease;
+            border-left-width: 8px;
+            border-left-style: solid;
+        }
+
+        .event-card[data-primary="pizzata"] { border-left-color: var(--color-pizzata); }
+        .event-card[data-primary="incontro"] { border-left-color: var(--color-incontro); }
+        .event-card[data-primary="fede"] { border-left-color: var(--color-fede); }
+        .event-card[data-primary="proposte"] { border-left-color: var(--color-proposte); }
+        .event-card[data-primary="uscita"] { border-left-color: var(--color-uscita); }
+        .event-card[data-primary="campo"] { border-left-color: var(--color-campo); }
+
+        .event-card:hover {
+            transform: translate(-2px, -3px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+            background: #ffffff;
+        }
+
+        .event-card.hidden { display: none; }
+
+        .event-date {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.15rem;
+            font-weight: 900;
+            min-width: 165px;
+            color: #1952a2;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .event-time {
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: #64748b;
+        }
+
+        .event-info { flex-grow: 1; padding: 0 15px; }
+
+        .event-title {
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: #0f172a;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .event-tags {
+            display: flex;
+            gap: 6px;
+            flex-wrap: wrap;
+            margin-top: 6px;
+        }
+
+        .tag {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.68rem;
+            font-weight: 800;
+            padding: 3px 8px;
+            border-radius: 3px;
+            text-transform: uppercase;
+        }
+
+        .tag-pizzata { background-color: var(--color-pizzata); color: #fff; }
+        .tag-incontro { background-color: var(--color-incontro); color: #fff; }
+        .tag-fede { background-color: var(--color-fede); color: #fff; }
+        .tag-proposte { background-color: var(--color-proposte); color: #fff; }
+        .tag-uscita { background-color: var(--color-uscita); color: #fff; }
+        .tag-campo { background-color: var(--color-campo); color: #fff; }
+        .tag-dadecidere { background-color: var(--color-dadecidere); color: #11284d; }
+
+        .hourglass-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            background-color: #fef3c7;
+            border: 2px solid #f59e0b;
+            color: #92400e;
+            padding: 2px 8px;
+            border-radius: 16px;
+            font-size: 0.75rem;
+            font-weight: 800;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .hourglass-icon {
+            width: 20px;
+            height: 20px;
+            fill: #d97706;
+            animation: rotateHourglass 3s infinite ease-in-out;
+        }
+
+        @keyframes rotateHourglass {
+            0%, 100% { transform: rotate(0deg); }
+            50% { transform: rotate(180deg); }
+        }
+
+        .calendar-btn-container {
+            text-align: center;
+            margin: 30px 0 10px 0;
+        }
+
+        .calendar-btn-small {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background-color: #ffffff;
+            color: #1952a2;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.78rem;
+            font-weight: 800;
+            padding: 8px 16px;
+            border-radius: 2px;
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            cursor: pointer;
+            box-shadow: 2px 2px 0px rgba(0, 0, 0, 0.25);
+            transition: all 0.2s ease;
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .calendar-btn-small:hover {
+            background-color: var(--warm-amber);
+            color: #11284d;
+            transform: translate(-1px, -1px);
+            box-shadow: 4px 4px 0px rgba(0, 0, 0, 0.3);
+        }
+
+        .calendar-btn-small svg {
+            width: 16px;
+            height: 16px;
+            fill: currentColor;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 20px;
+            padding-top: 15px;
+            border-top: 1px solid rgba(255, 255, 255, 0.15);
+        }
+
+        .quote-text {
+            font-size: 1.1rem;
+            font-style: italic;
+            color: var(--warm-amber);
+            margin-bottom: 5px;
+            font-weight: 500;
+        }
+
+        .oratorio-text {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 800;
+            opacity: 0.8;
+        }
+
+        /* BANNER CAMMINO FLUTTUANTE IN BASSO */
+        .floating-path-filter {
+            position: fixed;
+            bottom: 15px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 1000;
+            width: 92%;
+            max-width: 850px;
+            background: rgba(17, 40, 77, 0.75);
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            border-radius: 35px;
+            padding: 10px 16px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.35);
+            backdrop-filter: blur(16px);
+            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.4s ease;
+            overflow-x: auto;
+        }
+
+        .floating-path-filter.banner-hidden {
+            transform: translate(-50%, 120px);
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .path-track {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+            min-width: 650px;
+            padding: 0 5px;
+        }
+
+        .path-line-svg {
+            position: absolute;
+            top: 20px;
+            left: 25px;
+            right: 25px;
+            height: 2px;
+            background: repeating-linear-gradient(90deg, rgba(255, 255, 255, 0.25) 0, rgba(255, 255, 255, 0.25) 8px, transparent 8px, transparent 16px);
+            z-index: 1;
+        }
+
+        .path-node {
+            position: relative;
+            z-index: 2;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            cursor: pointer;
+            background: none;
+            border: none;
+            color: #ffffff;
+            transition: transform 0.2s;
+        }
+
+        .path-node:hover { transform: translateY(-2px); }
+
+        .node-circle {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(17, 40, 77, 0.85);
+            border: 2px solid rgba(255, 255, 255, 0.25);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.25s ease;
+        }
+
+        .node-circle svg {
+            width: 18px;
+            height: 18px;
+            fill: rgba(255, 255, 255, 0.75);
+            transition: all 0.25s ease;
+        }
+
+        .node-label {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.68rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            margin-top: 4px;
+            opacity: 0.75;
+            transition: opacity 0.25s ease;
+            white-space: nowrap;
+        }
+
+        .path-node.active .node-circle {
+            border-color: var(--warm-amber);
+            background: var(--rose-poster);
+            transform: scale(1.1);
+        }
+
+        .path-node.active .node-circle svg { fill: #ffffff; }
+        .path-node.active .node-label { opacity: 1; color: var(--warm-amber); }
+
+        /* RESPONSIVE LAYOUT */
+        @media (min-width: 601px) and (max-width: 1024px) {
+            body { padding: 30px 25px 130px 25px; }
+            .box-percorso { font-size: 2.2rem; }
+            .box-ado { font-size: 2.8rem; }
+        }
+
+        @media (min-width: 1025px) {
+            body { padding: 40px 40px 140px 40px; }
+            .container { max-width: 960px; }
+            .month-events { grid-template-columns: repeat(2, 1fr); }
+            .box-percorso { font-size: 2.6rem; padding: 10px 42px; }
+            .box-ado { font-size: 3.4rem; padding: 4px 54px; }
+        }
+
+        @media (max-width: 600px) {
+            .event-card { flex-direction: column; align-items: flex-start; gap: 8px; }
+            .event-info { padding: 0; }
+            .box-percorso { font-size: 1.6rem; padding: 6px 20px; }
+            .box-ado { font-size: 2rem; padding: 2px 28px; }
+            .sub-pastorale { font-size: 0.8rem; letter-spacing: 1.5px; }
+            .floating-path-filter { border-radius: 25px; padding: 8px 12px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ONDE DECORATIVE DALLA LOCANDINA -->
+    <svg class="wave-container wave-top-left" viewBox="0 0 100 60">
+        <path d="M 0 10 Q 20 40 40 10 T 80 10" fill="none" stroke="#ffca03" stroke-width="8" stroke-linecap="round"/>
+        <path d="M 0 25 Q 20 55 40 25 T 80 25" fill="none" stroke="#ff2b88" stroke-width="8" stroke-linecap="round"/>
+    </svg>
+
+    <svg class="wave-container wave-bottom-right" viewBox="0 0 100 60">
+        <path d="M 0 10 Q 20 40 40 10 T 80 10" fill="none" stroke="#ffca03" stroke-width="8" stroke-linecap="round"/>
+        <path d="M 0 25 Q 20 55 40 25 T 80 25" fill="none" stroke="#ff2b88" stroke-width="8" stroke-linecap="round"/>
+    </svg>
+
+    <div class="bg-decorative-circle"></div>
+
+    <!-- INTRO ANIMATA -->
+    <div id="intro-overlay">
+        <div class="path-line">
+            <svg class="footstep left step-1" viewBox="0 0 32 32"><path d="M16 2a7 7 0 0 0-7 7c0 2.5 1.5 4.5 3 6.5-1.5 2.5-3 5.5-3 9a6 6 0 0 0 12 0c0-3.5-1.5-6.5-3-9 1.5-2 3-4 3-6.5a7 7 0 0 0-7-7z"/></svg>
+            <svg class="footstep right step-2" viewBox="0 0 32 32"><path d="M16 2a7 7 0 0 0-7 7c0 2.5 1.5 4.5 3 6.5-1.5 2.5-3 5.5-3 9a6 6 0 0 0 12 0c0-3.5-1.5-6.5-3-9 1.5-2 3-4 3-6.5a7 7 0 0 0-7-7z"/></svg>
+            <svg class="footstep left step-3" viewBox="0 0 32 32"><path d="M16 2a7 7 0 0 0-7 7c0 2.5 1.5 4.5 3 6.5-1.5 2.5-3 5.5-3 9a6 6 0 0 0 12 0c0-3.5-1.5-6.5-3-9 1.5-2 3-4 3-6.5a7 7 0 0 0-7-7z"/></svg>
+            <svg class="footstep right step-4" viewBox="0 0 32 32"><path d="M16 2a7 7 0 0 0-7 7c0 2.5 1.5 4.5 3 6.5-1.5 2.5-3 5.5-3 9a6 6 0 0 0 12 0c0-3.5-1.5-6.5-3-9 1.5-2 3-4 3-6.5a7 7 0 0 0-7-7z"/></svg>
+            <svg class="footstep left step-5" viewBox="0 0 32 32"><path d="M16 2a7 7 0 0 0-7 7c0 2.5 1.5 4.5 3 6.5-1.5 2.5-3 5.5-3 9a6 6 0 0 0 12 0c0-3.5-1.5-6.5-3-9 1.5-2 3-4 3-6.5a7 7 0 0 0-7-7z"/></svg>
+        </div>
+        <div class="intro-text">Percorso ADO</div>
+    </div>
+
+    <div class="container">
+        <header>
+            <img src="https://lh3.googleusercontent.com/d/1k6PNcR8zhOK4LLQFzjEC7E4-2wAlrQRV" alt="Oratorio Albano Logo" class="logo-oratorio" onerror="this.src='https://drive.google.com/thumbnail?id=1k6PNcR8zhOK4LLQFzjEC7E4-2wAlrQRV&sz=w200'">
+            <div>
+                <div class="poster-title-container">
+                    <div class="box-percorso">PERCORSO</div>
+                    <div class="box-ado">ADO</div>
+                </div>
+                <div class="sub-pastorale">ANNO PASTORALE 2026-2027</div>
+            </div>
+        </header>
+
+        <!-- OTTOBRE 2026 -->
+        <section class="month-section" data-month="10">
+            <div class="month-header">Ottobre 2026</div>
+            <div class="month-events">
+                <div class="event-card" data-primary="pizzata" data-tags="pizzata incontro">
+                    <div class="event-date">
+                        11/10/2026
+                        <span class="event-time">Ore 19:00 in Oratorio</span>
+                    </div>
+                    <div class="event-info">
+                        <div class="event-title">Pizza</div>
+                        <div class="event-tags">
+                            <span class="tag tag-pizzata">Pizzata</span>
+                            <span class="tag tag-incontro">Incontro</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="event-card" data-primary="incontro" data-tags="incontro">
+                    <div class="event-date">
+                        18/10/2026
+                        <span class="event-time">Ore 19:00 in Oratorio</span>
+                    </div>
+                    <div class="event-info">
+                        <div class="event-title">Attività gruppi ADO</div>
+                        <div class="event-tags">
+                            <span class="tag tag-incontro">Incontro</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- NOVEMBRE 2026 -->
+        <section class="month-section" data-month="11">
+            <div class="month-header">Novembre 2026</div>
+            <div class="month-events">
+                <div class="event-card" data-primary="pizzata" data-tags="pizzata incontro">
+                    <div class="event-date">
+                        08/11/2026
+                        <span class="event-time">Ore 19:00 in Oratorio</span>
+                    </div>
+                    <div class="event-info">
+                        <div class="event-title">Pizza e attività</div>
+                        <div class="event-tags">
+                            <span class="tag tag-pizzata">Pizzata</span>
+                            <span class="tag tag-incontro">Incontro</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="event-card" data-primary="incontro" data-tags="incontro">
+                    <div class="event-date">
+                        22/11/2026
+                        <span class="event-time">Ore 19:00 in Oratorio</span>
+                    </div>
+                    <div class="event-info">
+                        <div class="event-title">Attività gruppi ADO</div>
+                        <div class="event-tags">
+                            <span class="tag tag-incontro">Incontro</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="event-card" data-primary="proposte" data-tags="proposte dadecidere">
+                    <div class="event-date">28-29/11/2026</div>
+                    <div class="event-info">
+                        <div class="event-title">
+                            Vendita torte (autofinanziamento)
+                            <div class="hourglass-badge">
+                                <svg class="hourglass-icon" viewBox="0 0 24 24"><path d="M6 2c-1.1 0-2 .9-2 2v2c0 2.2 1.8 4 4 4l1 1-1 1c-2.2 0-4 1.8-4 4v2c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2v-2c0-2.2-1.8-4-4-4l-1-1 1-1c2.2 0 4-1.8 4-4V4c0-1.1-.9-2-2-2H6z"/></svg>
+                                Da definire
+                            </div>
+                        </div>
+                        <div class="event-tags">
+                            <span class="tag tag-proposte">Proposte +</span>
+                            <span class="tag tag-dadecidere">Da Decidere</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- DICEMBRE 2026 -->
+        <section class="month-section" data-month="12">
+            <div class="month-header">Dicembre 2026</div>
+            <div class="month-events">
+                <div class="event-card" data-primary="pizzata" data-tags="pizzata incontro">
+                    <div class="event-date">
+                        13/12/2026
+                        <span class="event-time">Ore 19:00 in Oratorio</span>
+                    </div>
+                    <div class="event-info">
+                        <div class="event-title">Pizza</div>
+                        <div class="event-tags">
+                            <span class="tag tag-pizzata">Pizzata</span>
+                            <span class="tag tag-incontro">Incontro</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="event-card" data-primary="fede" data-tags="fede">
+                    <div class="event-date">20/12/2026</div>
+                    <div class="event-info">
+                        <div class="event-title">Confessioni</div>
+                        <div class="event-tags">
+                            <span class="tag tag-fede">Fede</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="event-card" data-primary="uscita" data-tags="uscita">
+                    <div class="event-date">23/12/2026</div>
+                    <div class="event-info">
+                        <div class="event-title">Pattinaggio</div>
+                        <div class="event-tags">
+                            <span class="tag tag-uscita">Uscita</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="event-card" data-primary="campo" data-tags="campo">
+                    <div class="event-date">27-29/12/2026</div>
+                    <div class="event-info">
+                        <div class="event-title">Campo Invernale</div>
+                        <div class="event-tags">
+                            <span class="tag tag-campo">Campo</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- GENNAIO 2027 -->
+        <section class="month-section" data-month="01">
+            <div class="month-header">Gennaio 2027</div>
+            <div class="month-events">
+                <div class="event-card" data-primary="pizzata" data-tags="pizzata incontro">
+                    <div class="event-date">
+                        10/01/2027
+                        <span class="event-time">Ore 19:00 in Oratorio</span>
+                    </div>
+                    <div class="event-info">
+                        <div class="event-title">Pizza e attività ADO</div>
+                        <div class="event-tags">
+                            <span class="tag tag-pizzata">Pizzata</span>
+                            <span class="tag tag-incontro">Incontro</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="event-card" data-primary="uscita" data-tags="uscita dadecidere">
+                    <div class="event-date">16/01/2027</div>
+                    <div class="event-info">
+                        <div class="event-title">
+                            Acquaworld
+                            <div class="hourglass-badge">
+                                <svg class="hourglass-icon" viewBox="0 0 24 24"><path d="M6 2c-1.1 0-2 .9-2 2v2c0 2.2 1.8 4 4 4l1 1-1 1c-2.2 0-4 1.8-4 4v2c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2v-2c0-2.2-1.8-4-4-4l-1-1 1-1c2.2 0 4-1.8 4-4V4c0-1.1-.9-2-2-2H6z"/></svg>
+                                Da definire
+                            </div>
+                        </div>
+                        <div class="event-tags">
+                            <span class="tag tag-uscita">Uscita</span>
+                            <span class="tag tag-dadecidere">Da Decidere</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="event-card" data-primary="incontro" data-tags="incontro">
+                    <div class="event-date">
+                        24/01/2027
+                        <span class="event-time">Ore 19:00 in Oratorio</span>
+                    </div>
+                    <div class="event-info">
+                        <div class="event-title">Attività ADO</div>
+                        <div class="event-tags">
+                            <span class="tag tag-incontro">Incontro</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="event-card" data-primary="proposte" data-tags="proposte">
+                    <div class="event-date">31/01/2027</div>
+                    <div class="event-info">
+                        <div class="event-title">Festa di Don Bosco</div>
+                        <div class="event-tags">
+                            <span class="tag tag-proposte">Proposte +</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FEBBRAIO 2027 -->
+        <section class="month-section" data-month="02">
+            <div class="month-header">Febbraio 2027</div>
+            <div class="month-events">
+                <div class="event-card" data-primary="pizzata" data-tags="pizzata incontro">
+                    <div class="event-date">
+                        14/02/2027
+                        <span class="event-time">Ore 19:00 in Oratorio</span>
+                    </div>
+                    <div class="event-info">
+                        <div class="event-title">Pizza</div>
+                        <div class="event-tags">
+                            <span class="tag tag-pizzata">Pizzata</span>
+                            <span class="tag tag-incontro">Incontro</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="event-card" data-primary="proposte" data-tags="proposte dadecidere">
+                    <div class="event-date">21-27/02/2027</div>
+                    <div class="event-info">
+                        <div class="event-title">
+                            Convivenza e/o attività caritativa
+                            <div class="hourglass-badge">
+                                <svg class="hourglass-icon" viewBox="0 0 24 24"><path d="M6 2c-1.1 0-2 .9-2 2v2c0 2.2 1.8 4 4 4l1 1-1 1c-2.2 0-4 1.8-4 4v2c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2v-2c0-2.2-1.8-4-4-4l-1-1 1-1c2.2 0 4-1.8 4-4V4c0-1.1-.9-2-2-2H6z"/></svg>
+                                Da definire
+                            </div>
+                        </div>
+                        <div class="event-tags">
+                            <span class="tag tag-proposte">Proposte +</span>
+                            <span class="tag tag-dadecidere">Da Decidere</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="event-card" data-primary="incontro" data-tags="incontro">
+                    <div class="event-date">
+                        28/02/2027
+                        <span class="event-time">Ore 19:00 in Oratorio</span>
+                    </div>
+                    <div class="event-info">
+                        <div class="event-title">Attività</div>
+                        <div class="event-tags">
+                            <span class="tag tag-incontro">Incontro</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- MARZO 2027 -->
+        <section class="month-section" data-month="03">
+            <div class="month-header">Marzo 2027</div>
+            <div class="month-events">
+                <div class="event-card" data-primary="pizzata" data-tags="pizzata incontro">
+                    <div class="event-date">
+                        14/03/2027
+                        <span class="event-time">Ore 19:00 in Oratorio</span>
+                    </div>
+                    <div class="event-info">
+                        <div class="event-title">Pizza e attività gruppi ADO</div>
+                        <div class="event-tags">
+                            <span class="tag tag-pizzata">Pizzata</span>
+                            <span class="tag tag-incontro">Incontro</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="event-card" data-primary="fede" data-tags="fede">
+                    <div class="event-date">21/03/2027</div>
+                    <div class="event-info">
+                        <div class="event-title">Confessioni</div>
+                        <div class="event-tags">
+                            <span class="tag tag-fede">Fede</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="event-card" data-primary="fede" data-tags="fede dadecidere">
+                    <div class="event-date">25-27/03/2027</div>
+                    <div class="event-info">
+                        <div class="event-title">
+                            Triduo / Attività Pasqua
+                            <div class="hourglass-badge">
+                                <svg class="hourglass-icon" viewBox="0 0 24 24"><path d="M6 2c-1.1 0-2 .9-2 2v2c0 2.2 1.8 4 4 4l1 1-1 1c-2.2 0-4 1.8-4 4v2c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2v-2c0-2.2-1.8-4-4-4l-1-1 1-1c2.2 0 4-1.8 4-4V4c0-1.1-.9-2-2-2H6z"/></svg>
+                                Da definire
+                            </div>
+                        </div>
+                        <div class="event-tags">
+                            <span class="tag tag-fede">Fede</span>
+                            <span class="tag tag-dadecidere">Da Decidere</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- APRILE 2027 -->
+        <section class="month-section" data-month="04">
+            <div class="month-header">Aprile 2027</div>
+            <div class="month-events">
+                <div class="event-card" data-primary="incontro" data-tags="incontro">
+                    <div class="event-date">
+                        04/04/2027
+                        <span class="event-time">Ore 19:00 in Oratorio</span>
+                    </div>
+                    <div class="event-info">
+                        <div class="event-title">Attività gruppi ADO</div>
+                        <div class="event-tags">
+                            <span class="tag tag-incontro">Incontro</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="event-card" data-primary="proposte" data-tags="proposte dadecidere">
+                    <div class="event-date">Dopo Pasqua</div>
+                    <div class="event-info">
+                        <div class="event-title">
+                            Aperitivo della comunità
+                            <div class="hourglass-badge">
+                                <svg class="hourglass-icon" viewBox="0 0 24 24"><path d="M6 2c-1.1 0-2 .9-2 2v2c0 2.2 1.8 4 4 4l1 1-1 1c-2.2 0-4 1.8-4 4v2c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2v-2c0-2.2-1.8-4-4-4l-1-1 1-1c2.2 0 4-1.8 4-4V4c0-1.1-.9-2-2-2H6z"/></svg>
+                                Da definire
+                            </div>
+                        </div>
+                        <div class="event-tags">
+                            <span class="tag tag-proposte">Proposte +</span>
+                            <span class="tag tag-dadecidere">Da Decidere</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="event-card" data-primary="pizzata" data-tags="pizzata incontro">
+                    <div class="event-date">
+                        18/04/2027
+                        <span class="event-time">Ore 19:00 in Oratorio</span>
+                    </div>
+                    <div class="event-info">
+                        <div class="event-title">Pizza</div>
+                        <div class="event-tags">
+                            <span class="tag tag-pizzata">Pizzata</span>
+                            <span class="tag tag-incontro">Incontro</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ESTATE 2027 -->
+        <section class="month-section" data-month="summer">
+            <div class="month-header">Estate 2027</div>
+            <div class="month-events">
+                <div class="event-card" data-primary="campo" data-tags="campo">
+                    <div class="event-date">Fine Luglio 2027</div>
+                    <div class="event-info">
+                        <div class="event-title">CRE e Campo Estivo</div>
+                        <div class="event-tags">
+                            <span class="tag tag-campo">Campo</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- TASTO SQUADRATO PICCOLO CHE SCARICA L'INTERO CALENDARIO -->
+        <div class="calendar-btn-container">
+            <button class="calendar-btn-small" onclick="downloadFullCalendarICS()">
+                <svg viewBox="0 0 24 24"><path d="M19 4h-1V2h-2v2H8V2H6v2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V10h14v10zm0-12H5V6h14v2zm-7 5h5v5h-5z"/></svg>
+                Salva tutti gli eventi nel Calendario
+            </button>
+        </div>
+
+        <footer>
+            <div class="quote-text">«Si avvicinò e camminava con loro»</div>
+            <div class="oratorio-text">Oratorio Albano</div>
+        </footer>
+    </div>
+
+    <!-- BANNER CAMMINO FLUTTUANTE IN BASSO -->
+    <div class="floating-path-filter" id="floatingFilter">
+        <div class="path-track">
+            <div class="path-line-svg"></div>
+
+            <button class="path-node active" data-filter="all" onclick="selectPathNode('all', this)">
+                <div class="node-circle">
+                    <svg viewBox="0 0 24 24"><path d="M12 2L2 12h3v8h6v-6h2v6h6v-8h3L12 2z"/></svg>
+                </div>
+                <span class="node-label">Tutti</span>
+            </button>
+
+            <button class="path-node" data-filter="pizzata" onclick="selectPathNode('pizzata', this)">
+                <div class="node-circle">
+                    <svg viewBox="0 0 24 24"><path d="M12 2L1 21h22L12 2zm0 3.5l7.5 13.5h-15L12 5.5zM12 9a1.5 1.5 0 100 3 1.5 1.5 0 000-3zm-3 5a1.5 1.5 0 100 3 1.5 1.5 0 000-3zm6 0a1.5 1.5 0 100 3 1.5 1.5 0 000-3z"/></svg>
+                </div>
+                <span class="node-label">Pizzate</span>
+            </button>
+
+            <button class="path-node" data-filter="incontro" onclick="selectPathNode('incontro', this)">
+                <div class="node-circle">
+                    <svg viewBox="0 0 24 24"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5z"/></svg>
+                </div>
+                <span class="node-label">Incontri</span>
+            </button>
+
+            <button class="path-node" data-filter="fede" onclick="selectPathNode('fede', this)">
+                <div class="node-circle">
+                    <svg viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+                </div>
+                <span class="node-label">Fede</span>
+            </button>
+
+            <button class="path-node" data-filter="proposte" onclick="selectPathNode('proposte', this)">
+                <div class="node-circle">
+                    <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                </div>
+                <span class="node-label">Proposte +</span>
+            </button>
+
+            <button class="path-node" data-filter="uscita" onclick="selectPathNode('uscita', this)">
+                <div class="node-circle">
+                    <svg viewBox="0 0 24 24"><path d="M18.92 6.01C18.72 5.42 18.16 5 17.5 5h-11c-.66 0-1.21.42-1.42 1.01L3 12v8c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-1h12v1c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-8l-2.08-5.99z"/></svg>
+                </div>
+                <span class="node-label">Uscite</span>
+            </button>
+
+            <button class="path-node" data-filter="campo" onclick="selectPathNode('campo', this)">
+                <div class="node-circle">
+                    <svg viewBox="0 0 24 24"><path d="M14 6l-3.75 5 2.85 3.8-1.6 1.2C9.81 13.75 7 10 7 10l-6 8h22L14 6z"/></svg>
+                </div>
+                <span class="node-label">Campi</span>
+            </button>
+
+            <button class="path-node" data-filter="dadecidere" onclick="selectPathNode('dadecidere', this)">
+                <div class="node-circle">
+                    <svg viewBox="0 0 24 24"><path d="M6 2c-1.1 0-2 .9-2 2v2c0 2.2 1.8 4 4 4l1 1-1 1c-2.2 0-4 1.8-4 4v2c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2v-2c0-2.2-1.8-4-4-4l-1-1 1-1c2.2 0 4-1.8 4-4V4c0-1.1-.9-2-2-2H6z"/></svg>
+                </div>
+                <span class="node-label">Da Decidere</span>
+            </button>
+        </div>
+    </div>
+
+    <script>
+        function downloadFullCalendarICS() {
+            const events = [
+                { title: "Pizza ADO", start: "20261011T190000", end: "20261011T210000", desc: "Pizza e incontro del Percorso ADO" },
+                { title: "Attività gruppi ADO", start: "20261018T190000", end: "20261018T210000", desc: "Attività gruppi ADO in Oratorio" },
+                { title: "Pizza e attività ADO", start: "20261108T190000", end: "20261108T210000", desc: "Pizza e attività del Percorso ADO" },
+                { title: "Attività gruppi ADO", start: "20261122T190000", end: "20261122T210000", desc: "Incontro del Percorso ADO" },
+                { title: "Vendita torte ADO", start: "20261128T090000", end: "20261129T180000", desc: "Autofinanziamento vendita torte ADO" },
+                { title: "Pizza ADO", start: "20261213T190000", end: "20261213T210000", desc: "Pizza in Oratorio" },
+                { title: "Confessioni ADO", start: "20261220T160000", end: "20261220T180000", desc: "Confessioni ADO" },
+                { title: "Uscita Pattinaggio ADO", start: "20261223T150000", end: "20261223T190000", desc: "Uscita Pattinaggio sul ghiaccio" },
+                { title: "Campo Invernale ADO", start: "20261227T080000", end: "20261229T180000", desc: "Campo Invernale ADO" },
+                { title: "Pizza e attività ADO", start: "20270110T190000", end: "20270110T210000", desc: "Pizza e attività ADO" },
+                { title: "Gita Acquaworld ADO", start: "20270116T090000", end: "20270116T180000", desc: "Uscita ad Acquaworld" },
+                { title: "Attività ADO", start: "20270124T190000", end: "20270124T210000", desc: "Attività ADO" },
+                { title: "Festa di Don Bosco", start: "20270131T100000", end: "20270131T180000", desc: "Festa di Don Bosco" },
+                { title: "Pizza ADO", start: "20270214T190000", end: "20270214T210000", desc: "Pizza ADO" },
+                { title: "Convivenza ADO", start: "20270221T090000", end: "20270227T180000", desc: "Convivenza e/o attività caritativa" },
+                { title: "Attività ADO", start: "20270228T190000", end: "20270228T210000", desc: "Attività ADO" },
+                { title: "Pizza e attività ADO", start: "20270314T190000", end: "20270314T210000", desc: "Pizza e attività gruppi ADO" },
+                { title: "Confessioni ADO", start: "20270321T160000", end: "20270321T180000", desc: "Confessioni ADO" },
+                { title: "Triduo e attività Pasqua", start: "20270325T090000", end: "20270327T180000", desc: "Triduo / Attività Pasqua" },
+                { title: "Attività gruppi ADO", start: "20270404T190000", end: "20270404T210000", desc: "Attività gruppi ADO" },
+                { title: "Pizza ADO", start: "20270418T190000", end: "20270418T210000", desc: "Pizza ADO" },
+                { title: "CRE e Campo Estivo ADO", start: "20270720T080000", end: "20270727T180000", desc: "CRE e Campo Estivo ADO" }
+            ];
+
+            let icsContent = "BEGIN:VCALENDAR\r\nVERSION:2.0\r\nPRODID:-//Oratorio Albano//Percorso ADO//IT\r\nCALSCALE:GREGORIAN\r\nMETHOD:PUBLISH\r\n";
+
+            events.forEach(e => {
+                icsContent += "BEGIN:VEVENT\r\n";
+                icsContent += `SUMMARY:${e.title}\r\n`;
+                icsContent += `DTSTART:${e.start}\r\n`;
+                icsContent += `DTEND:${e.end}\r\n`;
+                icsContent += `DESCRIPTION:${e.desc}\r\n`;
+                icsContent += "LOCATION:Oratorio Albano\r\n";
+                icsContent += "END:VEVENT\r\n";
+            });
+
+            icsContent += "END:VCALENDAR\r\n";
+
+            const blob = new Blob([icsContent], { type: "text/calendar;charset=utf-8" });
+            const link = document.createElement("a");
+            link.href = window.URL.createObjectURL(blob);
+            link.setAttribute("download", "Percorso_ADO_2026_2027.ics");
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
+
+        function selectPathNode(filter, element) {
+            document.querySelectorAll('.path-node').forEach(el => el.classList.remove('active'));
+            element.classList.add('active');
+
+            const sections = document.querySelectorAll('.month-section');
+
+            sections.forEach(section => {
+                let hasVisible = false;
+                const cards = section.querySelectorAll('.event-card');
+
+                cards.forEach(card => {
+                    const tags = card.getAttribute('data-tags').split(' ');
+                    if (filter === 'all' || tags.includes(filter)) {
+                        card.classList.remove('hidden');
+                        hasVisible = true;
+                    } else {
+                        card.classList.add('hidden');
+                    }
+                });
+
+                if (hasVisible) {
+                    section.style.display = 'block';
+                } else {
+                    section.style.display = 'none';
+                }
+            });
+        }
+
+        let lastScrollTop = 0;
+        const floatingFilter = document.getElementById('floatingFilter');
+
+        window.addEventListener('scroll', function() {
+            let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            
+            if (scrollTop > lastScrollTop && scrollTop > 70) {
+                floatingFilter.classList.add('banner-hidden');
+            } else {
+                floatingFilter.classList.remove('banner-hidden');
+            }
+            lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
+        }, false);
+    </script>
+</body>
+</html>
