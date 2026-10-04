@@ -398,29 +398,29 @@
             opacity: 0.8;
         }
 
-        /* --- BANNER IN BASSO FLUIDO E A SCOMPARSA DINAMICA --- */
+        /* --- BANNER IN BASSO RIMPICCIOLITO E FLUIDO --- */
         .floating-path-filter {
             position: fixed;
-            bottom: 12px;
+            bottom: 10px;
             left: 50%;
             transform: translateX(-50%);
             z-index: 1000;
-            width: 95%;
-            max-width: 850px;
-            background: rgba(17, 40, 77, 0.92);
+            width: 92%;
+            max-width: 780px;
+            background: rgba(17, 40, 77, 0.95);
             border: 1px solid rgba(255, 255, 255, 0.25);
-            border-radius: 30px;
-            padding: 8px 12px;
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+            border-radius: 24px;
+            padding: 5px 8px;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
             backdrop-filter: blur(16px);
-            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.4s ease;
+            transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.35s ease;
             overflow-x: auto;
             scrollbar-width: none; 
         }
         .floating-path-filter::-webkit-scrollbar { display: none; }
 
         .floating-path-filter.banner-hidden {
-            transform: translate(-50%, 120px) !important;
+            transform: translate(-50%, 90px) !important;
             opacity: 0;
             pointer-events: none;
         }
@@ -430,8 +430,8 @@
             justify-content: space-between;
             align-items: center;
             position: relative;
-            min-width: 580px; 
-            padding: 0 4px;
+            min-width: 520px; 
+            padding: 0 2px;
         }
 
         .liquid-wave-pill {
@@ -439,29 +439,23 @@
             top: 2px;
             bottom: 2px;
             left: 0;
-            width: 70px;
+            width: 60px;
             background: linear-gradient(135deg, var(--rose-poster), #e01570);
             border: 2px solid var(--warm-amber);
-            border-radius: 40% 60% 50% 50% / 50% 40% 60% 50%;
-            box-shadow: 0 0 15px rgba(255, 43, 136, 0.6), inset 0 0 8px rgba(255, 255, 255, 0.6);
+            border-radius: 30px;
+            box-shadow: 0 0 12px rgba(255, 43, 136, 0.6), inset 0 0 6px rgba(255, 255, 255, 0.6);
             z-index: 1;
-            transition: all 0.5s cubic-bezier(0.68, -0.6, 0.32, 1.6);
-            animation: liquidWaveMorph 4s infinite ease-in-out;
+            transition: all 0.4s cubic-bezier(0.68, -0.6, 0.32, 1.6);
             pointer-events: none;
-        }
-
-        @keyframes liquidWaveMorph {
-            0%, 100% { border-radius: 40% 60% 50% 50% / 50% 40% 60% 50%; transform: scaleY(1); }
-            50% { border-radius: 60% 40% 45% 55% / 40% 60% 55% 45%; transform: scaleY(1.06) scaleX(0.97); }
         }
 
         .path-line-svg {
             position: absolute;
-            top: 18px;
-            left: 20px;
-            right: 20px;
+            top: 15px;
+            left: 15px;
+            right: 15px;
             height: 2px;
-            background: repeating-linear-gradient(90deg, rgba(255, 255, 255, 0.25) 0, rgba(255, 255, 255, 0.25) 8px, transparent 8px, transparent 16px);
+            background: repeating-linear-gradient(90deg, rgba(255, 255, 255, 0.25) 0, rgba(255, 255, 255, 0.25) 6px, transparent 6px, transparent 12px);
             z-index: 0;
         }
 
@@ -475,57 +469,57 @@
             background: none;
             border: none;
             color: #ffffff;
-            padding: 4px 8px;
+            padding: 2px 6px;
             transition: all 0.3s ease;
         }
 
-        .path-node:hover { transform: translateY(-2px); }
+        .path-node:hover { transform: translateY(-1px); }
 
         .node-circle {
-            width: clamp(32px, 7vw, 38px);
-            height: clamp(32px, 7vw, 38px);
+            width: clamp(28px, 6vw, 32px);
+            height: clamp(28px, 6vw, 32px);
             border-radius: 50%;
             background: transparent;
             display: flex;
             align-items: center;
             justify-content: center;
             order: 2;
-            margin-top: 3px;
-            transition: all 0.4s ease;
+            margin-top: 2px;
+            transition: all 0.3s ease;
         }
 
         .node-circle svg {
-            width: clamp(15px, 3.5vw, 18px);
-            height: clamp(15px, 3.5vw, 18px);
+            width: clamp(13px, 3vw, 15px);
+            height: clamp(13px, 3vw, 15px);
             fill: rgba(255, 255, 255, 0.7);
-            transition: all 0.4s ease;
+            transition: all 0.3s ease;
         }
 
         .node-label {
             font-family: 'Montserrat', sans-serif;
-            font-size: clamp(0.58rem, 1.4vw, 0.68rem);
+            font-size: clamp(0.52rem, 1.2vw, 0.62rem);
             font-weight: 800;
             text-transform: uppercase;
             order: 1;
-            margin-bottom: 2px;
+            margin-bottom: 1px;
             opacity: 0.75;
-            transition: all 0.4s ease;
+            transition: all 0.3s ease;
             white-space: nowrap;
         }
 
-        .path-node.active { transform: translateY(3px); }
+        .path-node.active { transform: translateY(2px); }
 
         .path-node.active .node-label {
             opacity: 1;
             color: var(--warm-amber);
             font-weight: 900;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.4);
+            text-shadow: 0 1px 3px rgba(0,0,0,0.4);
         }
 
         .path-node.active .node-circle svg { 
             fill: #ffffff; 
-            transform: scale(1.1); 
-            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
+            transform: scale(1.05); 
+            filter: drop-shadow(0 1px 3px rgba(0,0,0,0.3));
         }
 
         @media (max-width: 480px) {
@@ -927,7 +921,7 @@
         </footer>
     </div>
 
-    <!-- BANNER IN BASSO CON L'ONDA LIQUIDA SCORREVOLE -->
+    <!-- BANNER IN BASSO RIMPICCIOLITO E FLUIDO -->
     <div class="floating-path-filter" id="floatingFilter">
         <div class="path-track">
             <div class="liquid-wave-pill" id="liquidWave"></div>
@@ -997,8 +991,8 @@
             const elementLeft = element.offsetLeft;
             const elementWidth = element.offsetWidth;
             
-            wave.style.left = (elementLeft - 4) + 'px';
-            wave.style.width = (elementWidth + 8) + 'px';
+            wave.style.left = (elementLeft - 2) + 'px';
+            wave.style.width = (elementWidth + 4) + 'px';
         }
 
         window.addEventListener('DOMContentLoaded', () => {
@@ -1056,20 +1050,20 @@
             }
         }
 
-        // GESTIONE SCROLL FLUIDA PER LA SCOMPARSA/COMPARSA DEL BANNER
+        // GESTIONE SCROLL FLUIDA E STABILE PER LA SCOMPARSA DEL BANNER
         let lastScrollTop = 0;
         const floatingFilter = document.getElementById('floatingFilter');
 
         window.addEventListener('scroll', function() {
             let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
             
-            if (scrollTop > lastScrollTop && scrollTop > 50) {
+            if (scrollTop > lastScrollTop && scrollTop > 40) {
                 floatingFilter.classList.add('banner-hidden');
-            } else {
+            } else if (scrollTop < lastScrollTop) {
                 floatingFilter.classList.remove('banner-hidden');
             }
             lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
-        }, false);
+        }, { passive: true });
     </script>
 </body>
 </html>
