@@ -47,8 +47,7 @@
             );
             color: #ffffff;
             min-height: 100vh;
-            /* Padding fluido dinamico in base allo schermo */
-            padding: clamp(10px, 3vw, 30px) clamp(10px, 3vw, 20px) 130px clamp(10px, 3vw, 20px);
+            padding: clamp(10px, 3vw, 30px) clamp(10px, 3vw, 20px) 140px clamp(10px, 3vw, 20px);
             position: relative;
             overflow-x: hidden;
         }
@@ -414,14 +413,12 @@
             padding: 8px 12px;
             box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
             backdrop-filter: blur(16px);
-            /* Transizione fluida sia per la posizione che per la scomparsa */
             transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.4s ease;
             overflow-x: auto;
             scrollbar-width: none; 
         }
         .floating-path-filter::-webkit-scrollbar { display: none; }
 
-        /* Classe per nascondere il banner quando si scorre giù */
         .floating-path-filter.banner-hidden {
             transform: translate(-50%, 120px) !important;
             opacity: 0;
@@ -1067,10 +1064,8 @@
             let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
             
             if (scrollTop > lastScrollTop && scrollTop > 50) {
-                // Scorre verso il basso -> Nasconde il banner
                 floatingFilter.classList.add('banner-hidden');
             } else {
-                // Scorre verso l'alto -> Mostra il banner
                 floatingFilter.classList.remove('banner-hidden');
             }
             lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
