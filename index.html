@@ -522,132 +522,179 @@
             filter: drop-shadow(0 1px 3px rgba(0,0,0,0.3));
         }
 
-        /* --- OTTIMIZZAZIONE MOBILE --- */
+        @media (max-width: 480px) {
+            .event-card { flex-direction: column; align-items: flex-start; gap: 6px; }
+            .event-info { padding: 0; }
+        }
+    
+        /* CORREZIONE MOBILE DEFINITIVA */
         @media (max-width: 600px) {
-            /* Titolo: evita sovrapposizioni sui telefoni stretti */
-            .poster-title-container {
+            html, body {
                 width: 100%;
                 max-width: 100%;
+                overflow-x: hidden;
+            }
+
+            .container {
+                width: 100%;
+                max-width: 100%;
+                padding-left: 10px;
+                padding-right: 10px;
+                box-sizing: border-box;
+            }
+
+            header {
+                width: 100%;
+                box-sizing: border-box;
+            }
+
+            .poster-title-container {
+                display: flex;
+                width: max-content;
+                max-width: calc(100vw - 24px);
+                margin: 0 auto;
+                align-items: center;
+                box-sizing: border-box;
             }
 
             .box-percorso {
+                box-sizing: border-box;
+                max-width: calc(100vw - 44px);
                 font-size: clamp(1.25rem, 7vw, 1.8rem);
                 letter-spacing: 1px;
-                padding: 4px 18px;
-                border-radius: 10px;
+                padding: 4px 16px;
             }
 
             .box-ado {
-                font-size: clamp(1.7rem, 10vw, 2.5rem);
-                padding: 2px 28px;
-                margin-top: -7px;
-                border-radius: 12px;
+                box-sizing: border-box;
+                max-width: calc(100vw - 70px);
+                font-size: clamp(1.65rem, 10vw, 2.5rem);
+                padding: 2px 24px;
+                margin-top: 4px;
             }
 
             .sub-pastorale {
-                font-size: clamp(0.62rem, 2.7vw, 0.82rem);
-                letter-spacing: 1.2px;
-                margin-top: 11px;
+                font-size: clamp(0.58rem, 2.7vw, 0.82rem);
+                letter-spacing: 1px;
+                margin-top: 10px;
+                white-space: normal;
             }
 
-            /* Barra filtri: tutti i pulsanti entrano nello schermo */
+            /* Filtro: tutti gli 8 pulsanti stanno sempre nella larghezza del telefono */
             .floating-path-filter {
-                width: calc(100% - 16px);
-                max-width: none;
-                left: 50%;
+                position: fixed;
+                left: 8px;
+                right: 8px;
                 bottom: max(8px, env(safe-area-inset-bottom));
-                padding: 4px 5px;
+                width: auto;
+                max-width: none;
+                box-sizing: border-box;
+                padding: 4px;
                 overflow: hidden;
                 border-radius: 20px;
+                transform: none;
             }
 
             .path-track {
+                display: flex;
                 width: 100%;
-                min-width: 0;
-                justify-content: stretch;
+                min-width: 0 !important;
+                max-width: 100%;
                 padding: 0;
+                margin: 0;
+                justify-content: stretch;
+                align-items: stretch;
+                box-sizing: border-box;
             }
 
             .path-node {
                 flex: 1 1 0;
+                width: 12.5%;
                 min-width: 0;
-                padding: 2px 1px;
+                max-width: 12.5%;
+                box-sizing: border-box;
+                padding: 2px 0;
+                margin: 0;
+                overflow: hidden;
             }
 
             .node-label {
-                font-size: clamp(0.43rem, 1.9vw, 0.58rem);
-                letter-spacing: -0.1px;
+                display: block;
+                width: 100%;
                 max-width: 100%;
+                min-height: 1.25em;
+                font-size: clamp(0.40rem, 1.85vw, 0.57rem);
+                line-height: 1.05;
+                letter-spacing: -0.15px;
+                white-space: normal;
                 overflow: hidden;
-                text-overflow: ellipsis;
+                text-overflow: clip;
+                text-align: center;
             }
 
             .node-circle {
-                width: 27px;
-                height: 27px;
+                width: 26px;
+                height: 26px;
+                flex: 0 0 26px;
                 margin-top: 2px;
             }
 
             .node-circle svg {
-                width: 13px;
-                height: 13px;
+                width: 12px;
+                height: 12px;
             }
 
             .path-line-svg {
                 left: 13px;
                 right: 13px;
-                top: 14px;
+                top: 15px;
             }
 
             .liquid-wave-pill {
                 top: 2px;
                 bottom: 2px;
+                max-width: 12.5%;
+                box-sizing: border-box;
             }
 
-            .event-card {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 6px;
-            }
-
-            .event-date {
-                min-width: 0;
-            }
-
-            .event-info {
-                padding: 0;
-                width: 100%;
+            /* Su mobile il filtro resta disponibile: niente sparizione durante lo scroll */
+            .floating-path-filter.banner-hidden {
+                transform: none;
+                opacity: 1;
+                pointer-events: auto;
             }
         }
 
         @media (max-width: 360px) {
             .floating-path-filter {
-                width: calc(100% - 10px);
-                padding-left: 3px;
-                padding-right: 3px;
+                left: 4px;
+                right: 4px;
+                padding: 3px;
             }
 
             .node-label {
-                font-size: 0.42rem;
+                font-size: 0.39rem;
             }
 
             .node-circle {
-                width: 25px;
-                height: 25px;
+                width: 24px;
+                height: 24px;
+                flex-basis: 24px;
             }
 
             .box-percorso {
-                font-size: 1.2rem;
-                padding-left: 14px;
-                padding-right: 14px;
+                font-size: 1.18rem;
+                padding-left: 13px;
+                padding-right: 13px;
             }
 
             .box-ado {
-                font-size: 1.65rem;
-                padding-left: 24px;
-                padding-right: 24px;
+                font-size: 1.58rem;
+                padding-left: 20px;
+                padding-right: 20px;
             }
         }
+
     </style>
 </head>
 <body>
@@ -1177,22 +1224,22 @@
         const floatingFilter = document.getElementById('floatingFilter');
 
         window.addEventListener('scroll', function() {
-            const scrollTop = Math.max(
-                0,
-                window.pageYOffset || document.documentElement.scrollTop
-            );
-            const delta = scrollTop - lastScrollTop;
+            const scrollTop = Math.max(0, window.pageYOffset || document.documentElement.scrollTop);
 
-            /* Nasconde solo dopo uno spostamento verticale reale,
-               evitando piccoli movimenti del touch-screen. */
-            if (delta > 8 && scrollTop > 50) {
-                floatingFilter.classList.add('banner-hidden');
-            } else if (delta < -8) {
+            /* Su telefono il filtro resta sempre visibile. */
+            if (window.innerWidth <= 600) {
                 floatingFilter.classList.remove('banner-hidden');
+                lastScrollTop = scrollTop;
+                return;
             }
 
+            if (scrollTop > lastScrollTop && scrollTop > 40) {
+                floatingFilter.classList.add('banner-hidden');
+            } else if (scrollTop < lastScrollTop) {
+                floatingFilter.classList.remove('banner-hidden');
+            }
             lastScrollTop = scrollTop;
         }, { passive: true });
-    </script>
+        </script>
 </body>
 </html>
