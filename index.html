@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PERCORSO ADO - Oratorio Albano</title>
-    <!-- Font Google: Montserrat e Fredoka per lo stile della locandina, Poppins per i testi -->
+    <!-- Font Google -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@600;700&family=Montserrat:wght@800;900&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -47,7 +47,8 @@
             );
             color: #ffffff;
             min-height: 100vh;
-            padding: 20px 15px 120px 15px;
+            /* Padding fluido dinamico in base allo schermo */
+            padding: clamp(10px, 3vw, 30px) clamp(10px, 3vw, 20px) 130px clamp(10px, 3vw, 20px);
             position: relative;
             overflow-x: hidden;
         }
@@ -66,11 +67,11 @@
             position: absolute;
             top: 40px;
             right: -60px;
-            width: 220px;
-            height: 220px;
+            width: clamp(140px, 25vw, 220px);
+            height: clamp(140px, 25vw, 220px);
             border-radius: 50%;
             background-color: var(--circle-purple);
-            border: 18px solid var(--warm-amber);
+            border: clamp(10px, 2vw, 18px) solid var(--warm-amber);
             z-index: 1;
             pointer-events: none;
             opacity: 0.85;
@@ -118,16 +119,46 @@
         .step-4 { animation-delay: 1.4s; fill: #38bdf8; }
         .step-5 { animation-delay: 1.8s; fill: var(--warm-amber); }
 
-        .intro-text {
+        .intro-text-container {
+            display: inline-flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
             margin-top: 25px;
-            font-family: 'Montserrat', sans-serif;
-            font-weight: 900;
-            font-size: 1.4rem;
-            letter-spacing: 3px;
-            color: var(--warm-amber);
-            text-transform: uppercase;
             opacity: 0;
             animation: stepFadeIn 0.5s 2.3s forwards;
+        }
+
+        .intro-box-percorso, .box-percorso {
+            background-color: #ffffff;
+            color: #1952a2;
+            font-family: 'Montserrat', sans-serif;
+            font-size: clamp(1.5rem, 4vw, 2.6rem);
+            font-weight: 900;
+            letter-spacing: 2px;
+            padding: clamp(4px, 1vw, 10px) clamp(20px, 4vw, 42px);
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+            transform: rotate(-2deg);
+            position: relative;
+            z-index: 1;
+            text-transform: uppercase;
+        }
+
+        .intro-box-ado, .box-ado {
+            background-color: var(--rose-poster);
+            color: #ffffff;
+            font-family: 'Fredoka', cursive, sans-serif;
+            font-size: clamp(2rem, 5.5vw, 3.4rem);
+            font-weight: 700;
+            padding: clamp(2px, 0.5vw, 4px) clamp(25px, 5vw, 54px);
+            border-radius: 14px;
+            box-shadow: 0 6px 16px rgba(0,0,0,0.3);
+            transform: rotate(1.5deg);
+            margin-top: clamp(-12px, -2vw, -16px);
+            position: relative;
+            z-index: 2;
+            text-transform: uppercase;
         }
 
         @keyframes stepFadeIn { to { opacity: 1; } }
@@ -146,14 +177,14 @@
 
         header {
             text-align: center;
-            margin-bottom: 35px;
+            margin-bottom: clamp(20px, 4vw, 35px);
         }
 
         .logo-oratorio {
-            width: 70px;
-            height: 70px;
+            width: clamp(50px, 10vw, 75px);
+            height: clamp(50px, 10vw, 75px);
             object-fit: contain;
-            margin-bottom: 12px;
+            margin-bottom: 10px;
             filter: drop-shadow(0 2px 6px rgba(0,0,0,0.3));
         }
 
@@ -164,82 +195,64 @@
             position: relative;
         }
 
-        .box-percorso {
-            background-color: #ffffff;
-            color: #1952a2;
-            font-family: 'Montserrat', sans-serif;
-            font-size: 2.5rem;
-            font-weight: 900;
-            letter-spacing: 2px;
-            padding: 8px 36px;
-            border-radius: 12px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.25);
-            transform: rotate(-2deg);
-            position: relative;
-            z-index: 1;
-        }
-
-        .box-ado {
-            background-color: var(--rose-poster);
-            color: #ffffff;
-            font-family: 'Fredoka', cursive, sans-serif;
-            font-size: 3.2rem;
-            font-weight: 700;
-            padding: 2px 48px;
-            border-radius: 14px;
-            box-shadow: 0 6px 16px rgba(0,0,0,0.3);
-            transform: rotate(1.5deg);
-            margin-top: -16px;
-            position: relative;
-            z-index: 2;
-        }
-
         .sub-pastorale {
             font-family: 'Montserrat', sans-serif;
-            font-size: 1rem;
+            font-size: clamp(0.75rem, 2vw, 1rem);
             font-weight: 900;
-            letter-spacing: 2.5px;
+            letter-spacing: 2px;
             color: var(--warm-amber);
             text-transform: uppercase;
-            margin-top: 18px;
+            margin-top: 14px;
             text-shadow: 0 2px 6px rgba(0,0,0,0.4);
         }
 
-        .month-section { margin-bottom: 28px; }
+        .month-section { margin-bottom: 24px; transition: all 0.4s ease; }
 
         .month-header {
             display: inline-block;
             background: var(--warm-amber);
             color: #11284d;
             font-family: 'Montserrat', sans-serif;
-            font-size: 1.1rem;
+            font-size: clamp(0.95rem, 2.2vw, 1.1rem);
             font-weight: 900;
-            padding: 6px 16px;
+            padding: 5px 14px;
             border-radius: 4px;
             text-transform: uppercase;
             letter-spacing: 1px;
-            margin-bottom: 12px;
+            margin-bottom: 10px;
             box-shadow: 3px 3px 0px rgba(0, 0, 0, 0.25);
             transform: rotate(-0.5deg);
         }
 
         .month-events {
             display: grid;
-            gap: 14px;
+            gap: 12px;
         }
 
+        @media (min-width: 768px) {
+            .month-events {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        /* --- TESSERE --- */
         .event-card {
             background: var(--card-light-bg);
             color: var(--text-dark);
             border-radius: 6px;
-            padding: 16px 20px;
+            padding: clamp(12px, 2vw, 16px) clamp(14px, 2.5vw, 20px);
             display: flex;
             align-items: center;
             justify-content: space-between;
             box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-            transition: all 0.2s ease;
-            border-left-width: 8px;
+            border-left-width: 7px;
             border-left-style: solid;
+            
+            opacity: 1;
+            transform: scale(1) translateY(0);
+            max-height: 250px;
+            overflow: hidden;
+            transition: all 0.5s cubic-bezier(0.25, 1, 0.5, 1);
         }
 
         .event-card[data-primary="pizzata"] { border-left-color: var(--color-pizzata); }
@@ -250,53 +263,64 @@
         .event-card[data-primary="campo"] { border-left-color: var(--color-campo); }
 
         .event-card:hover {
-            transform: translate(-2px, -3px);
+            transform: translate(-2px, -3px) scale(1.01);
             box-shadow: 0 8px 20px rgba(0,0,0,0.25);
             background: #ffffff;
         }
 
-        .event-card.hidden { display: none; }
+        .event-card.hidden {
+            opacity: 0;
+            transform: scale(0.85) translateY(15px);
+            max-height: 0;
+            padding-top: 0;
+            padding-bottom: 0;
+            margin-top: 0;
+            margin-bottom: 0;
+            border-width: 0;
+            pointer-events: none;
+            visibility: hidden;
+        }
 
         .event-date {
             font-family: 'Montserrat', sans-serif;
-            font-size: 1.15rem;
+            font-size: clamp(0.95rem, 2vw, 1.15rem);
             font-weight: 900;
-            min-width: 165px;
+            min-width: 140px;
             color: #1952a2;
             display: flex;
             flex-direction: column;
         }
 
         .event-time {
-            font-size: 0.8rem;
+            font-size: clamp(0.7rem, 1.5vw, 0.8rem);
             font-weight: 700;
             color: #64748b;
         }
 
-        .event-info { flex-grow: 1; padding: 0 15px; }
+        .event-info { flex-grow: 1; padding: 0 10px; }
 
         .event-title {
-            font-size: 1.05rem;
+            font-size: clamp(0.95rem, 2vw, 1.05rem);
             font-weight: 700;
             color: #0f172a;
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 8px;
             flex-wrap: wrap;
         }
 
         .event-tags {
             display: flex;
-            gap: 6px;
+            gap: 5px;
             flex-wrap: wrap;
-            margin-top: 6px;
+            margin-top: 5px;
         }
 
         .tag {
             font-family: 'Montserrat', sans-serif;
-            font-size: 0.68rem;
+            font-size: clamp(0.6rem, 1.3vw, 0.68rem);
             font-weight: 800;
-            padding: 3px 8px;
+            padding: 2px 7px;
             border-radius: 3px;
             text-transform: uppercase;
         }
@@ -312,20 +336,20 @@
         .hourglass-badge {
             display: inline-flex;
             align-items: center;
-            gap: 5px;
+            gap: 4px;
             background-color: #fef3c7;
-            border: 2px solid #f59e0b;
+            border: 1.5px solid #f59e0b;
             color: #92400e;
-            padding: 2px 8px;
-            border-radius: 16px;
-            font-size: 0.75rem;
+            padding: 2px 6px;
+            border-radius: 14px;
+            font-size: clamp(0.65rem, 1.4vw, 0.75rem);
             font-weight: 800;
             font-family: 'Montserrat', sans-serif;
         }
 
         .hourglass-icon {
-            width: 20px;
-            height: 20px;
+            width: 16px;
+            height: 16px;
             fill: #d97706;
             animation: rotateHourglass 3s infinite ease-in-out;
         }
@@ -335,53 +359,31 @@
             50% { transform: rotate(180deg); }
         }
 
-        .calendar-btn-container {
+        .event-counter-box {
             text-align: center;
-            margin: 30px 0 10px 0;
-        }
-
-        .calendar-btn-small {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            background-color: #ffffff;
-            color: #1952a2;
+            background: rgba(17, 40, 77, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            padding: 10px 16px;
+            border-radius: 12px;
+            margin: 30px 0 15px 0;
             font-family: 'Montserrat', sans-serif;
-            font-size: 0.78rem;
             font-weight: 800;
-            padding: 8px 16px;
-            border-radius: 2px;
-            border: 1px solid rgba(255, 255, 255, 0.4);
-            cursor: pointer;
-            box-shadow: 2px 2px 0px rgba(0, 0, 0, 0.25);
-            transition: all 0.2s ease;
-            text-decoration: none;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        .calendar-btn-small:hover {
-            background-color: var(--warm-amber);
-            color: #11284d;
-            transform: translate(-1px, -1px);
-            box-shadow: 4px 4px 0px rgba(0, 0, 0, 0.3);
-        }
-
-        .calendar-btn-small svg {
-            width: 16px;
-            height: 16px;
-            fill: currentColor;
+            font-size: clamp(0.85rem, 2vw, 0.95rem);
+            color: var(--warm-amber);
+            letter-spacing: 1px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            backdrop-filter: blur(10px);
         }
 
         footer {
             text-align: center;
-            margin-top: 20px;
+            margin-top: 15px;
             padding-top: 15px;
             border-top: 1px solid rgba(255, 255, 255, 0.15);
         }
 
         .quote-text {
-            font-size: 1.1rem;
+            font-size: clamp(0.95rem, 2.2vw, 1.1rem);
             font-style: italic;
             color: var(--warm-amber);
             margin-bottom: 5px;
@@ -390,34 +392,38 @@
 
         .oratorio-text {
             font-family: 'Montserrat', sans-serif;
-            font-size: 0.8rem;
+            font-size: clamp(0.7rem, 1.5vw, 0.8rem);
             text-transform: uppercase;
             letter-spacing: 2px;
             font-weight: 800;
             opacity: 0.8;
         }
 
-        /* BANNER CAMMINO FLUTTUANTE IN BASSO */
+        /* --- BANNER IN BASSO FLUIDO E A SCOMPARSA DINAMICA --- */
         .floating-path-filter {
             position: fixed;
-            bottom: 15px;
+            bottom: 12px;
             left: 50%;
             transform: translateX(-50%);
             z-index: 1000;
-            width: 92%;
+            width: 95%;
             max-width: 850px;
-            background: rgba(17, 40, 77, 0.75);
+            background: rgba(17, 40, 77, 0.92);
             border: 1px solid rgba(255, 255, 255, 0.25);
-            border-radius: 35px;
-            padding: 10px 16px;
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.35);
+            border-radius: 30px;
+            padding: 8px 12px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
             backdrop-filter: blur(16px);
+            /* Transizione fluida sia per la posizione che per la scomparsa */
             transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.4s ease;
             overflow-x: auto;
+            scrollbar-width: none; 
         }
+        .floating-path-filter::-webkit-scrollbar { display: none; }
 
+        /* Classe per nascondere il banner quando si scorre giù */
         .floating-path-filter.banner-hidden {
-            transform: translate(-50%, 120px);
+            transform: translate(-50%, 120px) !important;
             opacity: 0;
             pointer-events: none;
         }
@@ -427,18 +433,39 @@
             justify-content: space-between;
             align-items: center;
             position: relative;
-            min-width: 650px;
-            padding: 0 5px;
+            min-width: 580px; 
+            padding: 0 4px;
+        }
+
+        .liquid-wave-pill {
+            position: absolute;
+            top: 2px;
+            bottom: 2px;
+            left: 0;
+            width: 70px;
+            background: linear-gradient(135deg, var(--rose-poster), #e01570);
+            border: 2px solid var(--warm-amber);
+            border-radius: 40% 60% 50% 50% / 50% 40% 60% 50%;
+            box-shadow: 0 0 15px rgba(255, 43, 136, 0.6), inset 0 0 8px rgba(255, 255, 255, 0.6);
+            z-index: 1;
+            transition: all 0.5s cubic-bezier(0.68, -0.6, 0.32, 1.6);
+            animation: liquidWaveMorph 4s infinite ease-in-out;
+            pointer-events: none;
+        }
+
+        @keyframes liquidWaveMorph {
+            0%, 100% { border-radius: 40% 60% 50% 50% / 50% 40% 60% 50%; transform: scaleY(1); }
+            50% { border-radius: 60% 40% 45% 55% / 40% 60% 55% 45%; transform: scaleY(1.06) scaleX(0.97); }
         }
 
         .path-line-svg {
             position: absolute;
-            top: 20px;
-            left: 25px;
-            right: 25px;
+            top: 18px;
+            left: 20px;
+            right: 20px;
             height: 2px;
             background: repeating-linear-gradient(90deg, rgba(255, 255, 255, 0.25) 0, rgba(255, 255, 255, 0.25) 8px, transparent 8px, transparent 16px);
-            z-index: 1;
+            z-index: 0;
         }
 
         .path-node {
@@ -451,78 +478,68 @@
             background: none;
             border: none;
             color: #ffffff;
-            transition: transform 0.2s;
+            padding: 4px 8px;
+            transition: all 0.3s ease;
         }
 
         .path-node:hover { transform: translateY(-2px); }
 
         .node-circle {
-            width: 40px;
-            height: 40px;
+            width: clamp(32px, 7vw, 38px);
+            height: clamp(32px, 7vw, 38px);
             border-radius: 50%;
-            background: rgba(17, 40, 77, 0.85);
-            border: 2px solid rgba(255, 255, 255, 0.25);
+            background: transparent;
             display: flex;
             align-items: center;
             justify-content: center;
-            transition: all 0.25s ease;
+            order: 2;
+            margin-top: 3px;
+            transition: all 0.4s ease;
         }
 
         .node-circle svg {
-            width: 18px;
-            height: 18px;
-            fill: rgba(255, 255, 255, 0.75);
-            transition: all 0.25s ease;
+            width: clamp(15px, 3.5vw, 18px);
+            height: clamp(15px, 3.5vw, 18px);
+            fill: rgba(255, 255, 255, 0.7);
+            transition: all 0.4s ease;
         }
 
         .node-label {
             font-family: 'Montserrat', sans-serif;
-            font-size: 0.68rem;
+            font-size: clamp(0.58rem, 1.4vw, 0.68rem);
             font-weight: 800;
             text-transform: uppercase;
-            margin-top: 4px;
+            order: 1;
+            margin-bottom: 2px;
             opacity: 0.75;
-            transition: opacity 0.25s ease;
+            transition: all 0.4s ease;
             white-space: nowrap;
         }
 
-        .path-node.active .node-circle {
-            border-color: var(--warm-amber);
-            background: var(--rose-poster);
-            transform: scale(1.1);
+        .path-node.active { transform: translateY(3px); }
+
+        .path-node.active .node-label {
+            opacity: 1;
+            color: var(--warm-amber);
+            font-weight: 900;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.4);
         }
 
-        .path-node.active .node-circle svg { fill: #ffffff; }
-        .path-node.active .node-label { opacity: 1; color: var(--warm-amber); }
-
-        /* RESPONSIVE LAYOUT */
-        @media (min-width: 601px) and (max-width: 1024px) {
-            body { padding: 30px 25px 130px 25px; }
-            .box-percorso { font-size: 2.2rem; }
-            .box-ado { font-size: 2.8rem; }
+        .path-node.active .node-circle svg { 
+            fill: #ffffff; 
+            transform: scale(1.1); 
+            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
         }
 
-        @media (min-width: 1025px) {
-            body { padding: 40px 40px 140px 40px; }
-            .container { max-width: 960px; }
-            .month-events { grid-template-columns: repeat(2, 1fr); }
-            .box-percorso { font-size: 2.6rem; padding: 10px 42px; }
-            .box-ado { font-size: 3.4rem; padding: 4px 54px; }
-        }
-
-        @media (max-width: 600px) {
-            .event-card { flex-direction: column; align-items: flex-start; gap: 8px; }
+        @media (max-width: 480px) {
+            .event-card { flex-direction: column; align-items: flex-start; gap: 6px; }
             .event-info { padding: 0; }
-            .box-percorso { font-size: 1.6rem; padding: 6px 20px; }
-            .box-ado { font-size: 2rem; padding: 2px 28px; }
-            .sub-pastorale { font-size: 0.8rem; letter-spacing: 1.5px; }
-            .floating-path-filter { border-radius: 25px; padding: 8px 12px; }
         }
     </style>
 </head>
 <body>
 
-    <!-- ONDE DECORATIVE DALLA LOCANDINA -->
+    <!-- ONDE DECORATIVE -->
     <svg class="wave-container wave-top-left" viewBox="0 0 100 60">
         <path d="M 0 10 Q 20 40 40 10 T 80 10" fill="none" stroke="#ffca03" stroke-width="8" stroke-linecap="round"/>
         <path d="M 0 25 Q 20 55 40 25 T 80 25" fill="none" stroke="#ff2b88" stroke-width="8" stroke-linecap="round"/>
@@ -544,7 +561,10 @@
             <svg class="footstep right step-4" viewBox="0 0 32 32"><path d="M16 2a7 7 0 0 0-7 7c0 2.5 1.5 4.5 3 6.5-1.5 2.5-3 5.5-3 9a6 6 0 0 0 12 0c0-3.5-1.5-6.5-3-9 1.5-2 3-4 3-6.5a7 7 0 0 0-7-7z"/></svg>
             <svg class="footstep left step-5" viewBox="0 0 32 32"><path d="M16 2a7 7 0 0 0-7 7c0 2.5 1.5 4.5 3 6.5-1.5 2.5-3 5.5-3 9a6 6 0 0 0 12 0c0-3.5-1.5-6.5-3-9 1.5-2 3-4 3-6.5a7 7 0 0 0-7-7z"/></svg>
         </div>
-        <div class="intro-text">Percorso ADO</div>
+        <div class="intro-text-container">
+            <div class="intro-box-percorso">PERCORSO</div>
+            <div class="intro-box-ado">ADO</div>
+        </div>
     </div>
 
     <div class="container">
@@ -900,12 +920,8 @@
             </div>
         </section>
 
-        <!-- TASTO SQUADRATO PICCOLO CHE SCARICA L'INTERO CALENDARIO -->
-        <div class="calendar-btn-container">
-            <button class="calendar-btn-small" onclick="downloadFullCalendarICS()">
-                <svg viewBox="0 0 24 24"><path d="M19 4h-1V2h-2v2H8V2H6v2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V10h14v10zm0-12H5V6h14v2zm-7 5h5v5h-5z"/></svg>
-                Salva tutti gli eventi nel Calendario
-            </button>
+        <div class="event-counter-box" id="eventCounter">
+            Visualizzazione di tutti gli eventi (22)
         </div>
 
         <footer>
@@ -914,124 +930,104 @@
         </footer>
     </div>
 
-    <!-- BANNER CAMMINO FLUTTUANTE IN BASSO -->
+    <!-- BANNER IN BASSO CON L'ONDA LIQUIDA SCORREVOLE -->
     <div class="floating-path-filter" id="floatingFilter">
         <div class="path-track">
+            <div class="liquid-wave-pill" id="liquidWave"></div>
             <div class="path-line-svg"></div>
 
             <button class="path-node active" data-filter="all" onclick="selectPathNode('all', this)">
+                <span class="node-label">Tutti</span>
                 <div class="node-circle">
                     <svg viewBox="0 0 24 24"><path d="M12 2L2 12h3v8h6v-6h2v6h6v-8h3L12 2z"/></svg>
                 </div>
-                <span class="node-label">Tutti</span>
             </button>
 
             <button class="path-node" data-filter="pizzata" onclick="selectPathNode('pizzata', this)">
-                <div class="node-circle">
-                    <svg viewBox="0 0 24 24"><path d="M12 2L1 21h22L12 2zm0 3.5l7.5 13.5h-15L12 5.5zM12 9a1.5 1.5 0 100 3 1.5 1.5 0 000-3zm-3 5a1.5 1.5 0 100 3 1.5 1.5 0 000-3zm6 0a1.5 1.5 0 100 3 1.5 1.5 0 000-3z"/></svg>
-                </div>
                 <span class="node-label">Pizzate</span>
+                <div class="node-circle">
+                    <svg viewBox="0 0 24 24"><path d="M12 2L1 21h22L12 2zm0 3.5l7.5 13.5h-15L12 5.5zM12 9a1.5 1.5 0 100 3 1.5 1.5 0 000-3zm-3 5a1.5 1.5 0 100 3 1.5 1.5 0 000-3zm6 0a1.5 1.5 0 100 3 1.5 1.5 0 000-3 z"/></svg>
+                </div>
             </button>
 
             <button class="path-node" data-filter="incontro" onclick="selectPathNode('incontro', this)">
+                <span class="node-label">Incontri</span>
                 <div class="node-circle">
                     <svg viewBox="0 0 24 24"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5z"/></svg>
                 </div>
-                <span class="node-label">Incontri</span>
             </button>
 
             <button class="path-node" data-filter="fede" onclick="selectPathNode('fede', this)">
+                <span class="node-label">Fede</span>
                 <div class="node-circle">
                     <svg viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
                 </div>
-                <span class="node-label">Fede</span>
             </button>
 
             <button class="path-node" data-filter="proposte" onclick="selectPathNode('proposte', this)">
+                <span class="node-label">Proposte +</span>
                 <div class="node-circle">
                     <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
                 </div>
-                <span class="node-label">Proposte +</span>
             </button>
 
             <button class="path-node" data-filter="uscita" onclick="selectPathNode('uscita', this)">
+                <span class="node-label">Uscite</span>
                 <div class="node-circle">
                     <svg viewBox="0 0 24 24"><path d="M18.92 6.01C18.72 5.42 18.16 5 17.5 5h-11c-.66 0-1.21.42-1.42 1.01L3 12v8c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-1h12v1c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-8l-2.08-5.99z"/></svg>
                 </div>
-                <span class="node-label">Uscite</span>
             </button>
 
             <button class="path-node" data-filter="campo" onclick="selectPathNode('campo', this)">
+                <span class="node-label">Campi</span>
                 <div class="node-circle">
                     <svg viewBox="0 0 24 24"><path d="M14 6l-3.75 5 2.85 3.8-1.6 1.2C9.81 13.75 7 10 7 10l-6 8h22L14 6z"/></svg>
                 </div>
-                <span class="node-label">Campi</span>
             </button>
 
             <button class="path-node" data-filter="dadecidere" onclick="selectPathNode('dadecidere', this)">
+                <span class="node-label">Da Decidere</span>
                 <div class="node-circle">
                     <svg viewBox="0 0 24 24"><path d="M6 2c-1.1 0-2 .9-2 2v2c0 2.2 1.8 4 4 4l1 1-1 1c-2.2 0-4 1.8-4 4v2c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2v-2c0-2.2-1.8-4-4-4l-1-1 1-1c2.2 0 4-1.8 4-4V4c0-1.1-.9-2-2-2H6z"/></svg>
                 </div>
-                <span class="node-label">Da Decidere</span>
             </button>
         </div>
     </div>
 
     <script>
-        function downloadFullCalendarICS() {
-            const events = [
-                { title: "Pizza ADO", start: "20261011T190000", end: "20261011T210000", desc: "Pizza e incontro del Percorso ADO" },
-                { title: "Attività gruppi ADO", start: "20261018T190000", end: "20261018T210000", desc: "Attività gruppi ADO in Oratorio" },
-                { title: "Pizza e attività ADO", start: "20261108T190000", end: "20261108T210000", desc: "Pizza e attività del Percorso ADO" },
-                { title: "Attività gruppi ADO", start: "20261122T190000", end: "20261122T210000", desc: "Incontro del Percorso ADO" },
-                { title: "Vendita torte ADO", start: "20261128T090000", end: "20261129T180000", desc: "Autofinanziamento vendita torte ADO" },
-                { title: "Pizza ADO", start: "20261213T190000", end: "20261213T210000", desc: "Pizza in Oratorio" },
-                { title: "Confessioni ADO", start: "20261220T160000", end: "20261220T180000", desc: "Confessioni ADO" },
-                { title: "Uscita Pattinaggio ADO", start: "20261223T150000", end: "20261223T190000", desc: "Uscita Pattinaggio sul ghiaccio" },
-                { title: "Campo Invernale ADO", start: "20261227T080000", end: "20261229T180000", desc: "Campo Invernale ADO" },
-                { title: "Pizza e attività ADO", start: "20270110T190000", end: "20270110T210000", desc: "Pizza e attività ADO" },
-                { title: "Gita Acquaworld ADO", start: "20270116T090000", end: "20270116T180000", desc: "Uscita ad Acquaworld" },
-                { title: "Attività ADO", start: "20270124T190000", end: "20270124T210000", desc: "Attività ADO" },
-                { title: "Festa di Don Bosco", start: "20270131T100000", end: "20270131T180000", desc: "Festa di Don Bosco" },
-                { title: "Pizza ADO", start: "20270214T190000", end: "20270214T210000", desc: "Pizza ADO" },
-                { title: "Convivenza ADO", start: "20270221T090000", end: "20270227T180000", desc: "Convivenza e/o attività caritativa" },
-                { title: "Attività ADO", start: "20270228T190000", end: "20270228T210000", desc: "Attività ADO" },
-                { title: "Pizza e attività ADO", start: "20270314T190000", end: "20270314T210000", desc: "Pizza e attività gruppi ADO" },
-                { title: "Confessioni ADO", start: "20270321T160000", end: "20270321T180000", desc: "Confessioni ADO" },
-                { title: "Triduo e attività Pasqua", start: "20270325T090000", end: "20270327T180000", desc: "Triduo / Attività Pasqua" },
-                { title: "Attività gruppi ADO", start: "20270404T190000", end: "20270404T210000", desc: "Attività gruppi ADO" },
-                { title: "Pizza ADO", start: "20270418T190000", end: "20270418T210000", desc: "Pizza ADO" },
-                { title: "CRE e Campo Estivo ADO", start: "20270720T080000", end: "20270727T180000", desc: "CRE e Campo Estivo ADO" }
-            ];
-
-            let icsContent = "BEGIN:VCALENDAR\r\nVERSION:2.0\r\nPRODID:-//Oratorio Albano//Percorso ADO//IT\r\nCALSCALE:GREGORIAN\r\nMETHOD:PUBLISH\r\n";
-
-            events.forEach(e => {
-                icsContent += "BEGIN:VEVENT\r\n";
-                icsContent += `SUMMARY:${e.title}\r\n`;
-                icsContent += `DTSTART:${e.start}\r\n`;
-                icsContent += `DTEND:${e.end}\r\n`;
-                icsContent += `DESCRIPTION:${e.desc}\r\n`;
-                icsContent += "LOCATION:Oratorio Albano\r\n";
-                icsContent += "END:VEVENT\r\n";
-            });
-
-            icsContent += "END:VCALENDAR\r\n";
-
-            const blob = new Blob([icsContent], { type: "text/calendar;charset=utf-8" });
-            const link = document.createElement("a");
-            link.href = window.URL.createObjectURL(blob);
-            link.setAttribute("download", "Percorso_ADO_2026_2027.ics");
-            document.body.appendChild(link);
-            link.click();
-            document.body.removeChild(link);
+        function moveLiquidWave(element) {
+            const wave = document.getElementById('liquidWave');
+            const elementLeft = element.offsetLeft;
+            const elementWidth = element.offsetWidth;
+            
+            wave.style.left = (elementLeft - 4) + 'px';
+            wave.style.width = (elementWidth + 8) + 'px';
         }
+
+        window.addEventListener('DOMContentLoaded', () => {
+            const firstActive = document.querySelector('.path-node.active');
+            if (firstActive) {
+                moveLiquidWave(firstActive);
+            }
+        });
+
+        window.addEventListener('resize', () => {
+            const currentActive = document.querySelector('.path-node.active');
+            if (currentActive) {
+                moveLiquidWave(currentActive);
+            }
+        });
 
         function selectPathNode(filter, element) {
             document.querySelectorAll('.path-node').forEach(el => el.classList.remove('active'));
             element.classList.add('active');
 
+            moveLiquidWave(element);
+
             const sections = document.querySelectorAll('.month-section');
+            const counterBox = document.getElementById('eventCounter');
+            let totalVisibleEvents = 0;
+            const filterLabelText = element.querySelector('.node-label').textContent;
 
             sections.forEach(section => {
                 let hasVisible = false;
@@ -1042,6 +1038,7 @@
                     if (filter === 'all' || tags.includes(filter)) {
                         card.classList.remove('hidden');
                         hasVisible = true;
+                        totalVisibleEvents++;
                     } else {
                         card.classList.add('hidden');
                     }
@@ -1049,21 +1046,31 @@
 
                 if (hasVisible) {
                     section.style.display = 'block';
+                    section.style.opacity = '1';
                 } else {
                     section.style.display = 'none';
                 }
             });
+
+            if (filter === 'all') {
+                counterBox.textContent = `Visualizzazione di tutti gli eventi (${totalVisibleEvents})`;
+            } else {
+                counterBox.textContent = `Eventi di ${filterLabelText} (${totalVisibleEvents})`;
+            }
         }
 
+        // GESTIONE SCROLL FLUIDA PER LA SCOMPARSA/COMPARSA DEL BANNER
         let lastScrollTop = 0;
         const floatingFilter = document.getElementById('floatingFilter');
 
         window.addEventListener('scroll', function() {
             let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
             
-            if (scrollTop > lastScrollTop && scrollTop > 70) {
+            if (scrollTop > lastScrollTop && scrollTop > 50) {
+                // Scorre verso il basso -> Nasconde il banner
                 floatingFilter.classList.add('banner-hidden');
             } else {
+                // Scorre verso l'alto -> Mostra il banner
                 floatingFilter.classList.remove('banner-hidden');
             }
             lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
